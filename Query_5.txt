@@ -1,0 +1,4 @@
+5th  (6_questions.sql)
+
+1) select s.name, p.name, p.hours from scientists s inner join assignedto a on s.ssn= a.scientist join projects p on a.project=p.code order by p.name, s.name;
+2) select p.name from projects p left join assignedto a on p.code=a.project where a.project is null;

@@ -1,0 +1,4 @@
+7th  (10_questions.sql)
+
+1) select p.id, p.name, max(a.address) as address from people p left join address a on p.id=a.id group by p.id, p.name;
+2) select p.id, p.name, a.address from people p (select a1.id, a1.address from address a1 where a1.updatedate=(select max(a2.updatedate) from address a2 where a2.id=a1.id) a on p.id=a.id;

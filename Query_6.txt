@@ -1,0 +1,15 @@
+6)  8 _ Schema.sql
+
+
+1) select distinct p.name from physician p inner join undergoes u on p.EmployeeID=u.physician where procedures not in( select certificationdate from trained_in t where p.employeeid=t.physician);
+2) select distinct p.name , pr.name, u.dateundergoes, pa.name from physician p inner join procedures pr on p.EmployeeID=pr.code inner join undergoes u on p.EmployeeID=u.physician inner join patient pa  on p.ssn= pa.ssn where u.procedures not in( select certificationdate from trained_in t where p.employeeid=t.physician);
+3) select p.name  from physician p join trained_in t on p.employeeid =t.physician join procedures pr on t.treatment=pr.code join undergoes u on p.employeeid= u.physician and pr.code= u.procedures where u.dateundergoes > t.certificationexpires;
+4)select p.name ,pr.name,u.dateundergoes,pa.name, t.certificationexpires from physician p join trained_in t on p.employeeid =t.physician join procedures pr on t.treatment=pr.code join undergoes u on p.employeeid= u.physician and pr.code= u.procedures join patient pa on u.patient= pa.ssn where u.dateundergoes > t.certificationexpires;
+5) select p.Name, n.Name, a.start, a.end, a.examinationRoom ,pc.Name from appointment a inner join patient p on a.patient=p.ssn inner join nurse n on a.physician=n.employeeid inner join physician pc on n.ssn=pc.ssn where a.patient != p.ssn;
+6) select * from undergoes where patient != ( select stay.patient from stay where stay.stayid=undergoes.stay);
+7) select n.name from nurse n inner join room r on n.registered=r.unavailable where r.roomnumber=123;
+8) select examinationroom, count(*) as appcount from appointment group by examinationroom;
+9) select distinct p.name AS patientname, pp.name as primarycarephysician from patient p join prescribes pr on p.ssn = pr.patient join medication m on pr.medication = m.Code join undergoes u on p.SSN = u.patient join procedures proc on u.procedures = proc.Code join appointment a on p.SSN = a.patient join nurse n on a.PrepNurse = n.employeeID
+join physician pp on p.PCP = pp.employeeID left join  affiliated_with aw on pp.employeeID = aw.physician where m.description is not null and proc.cost > 500 and n.registered = 1 and aw.Department IS NULL group by  p.ssn, p.name, pp.name having count(distinct n.employeeid) >= 2;
+
+

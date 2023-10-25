@@ -1,0 +1,21 @@
+
+3rd  (3_questions.sql)
+
+1) select * from warehouses;
+2) select * from boxes where value>150;
+3) select distinct contents from boxes ;
+4) select avg(value) avg_value from boxes ;
+5) select w.code, avg(b.value)  avg_value from warehouses w inner join boxes b on  w.Code=b.Warehouse group by w.code;
+6) select w.code, avg(b.value)  avg_value from warehouses w inner join boxes b on  w.Code=b.Warehouse group by w.code having avg(b.value)>150;
+7) select b.code, w.location from boxes b inner join warehouses w on w.code = b.warehouse;
+8) select w.code, count(b.warehouse)from warehouses w inner join boxes b on w.code=b.warehouse group by b.warehouse;
+9) select code from warehouses w where (select count(*) from boxes b where b.warehouse =w.code) > w.capacity;
+10) select b.code from boxes b inner join warehouses w on b.warehouse=w.code where w.location ='Chicago'; 
+11) insert into warehouses (code, Location , Capacity) value (6, 'New York', 3);
+12) insert into boxes (code, contents,value,warehouse) value ('H5RT', 'Papers', 200, 2);
+13) update boxes set value=value* 0.8;
+14) delete from boxes where value<100;
+15) 
+16) create index idx_warehouse on boxes(warehouse);
+17) show indexes from warehouses;
+18) drop index  idx_warehouse on boxes;

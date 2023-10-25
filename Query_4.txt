@@ -1,0 +1,12 @@
+4th  (5_questions.sql)
+
+1) select name from pieces;
+2) select * from providers;
+3) select piece, avg(price) asavgprice from provides group by piece;
+4) select p.name from providers p inner join provides pr on p.code=pr.provider where pr.piece=1;
+5) select p.name from pieces p inner join provides pr on p.code = pr.piece where pr.provider='HAL';
+6) select p.name ,pr.name,pro.price,max(pro.price) from pieces p inner join provides pro on p.code=pro.piece inner join providers pr  on pr.code=pro.provider group by pro.piece;
+7) insert into offers(Code,Piece, Price) values ((select code from providers where Code='TNBC'), '1',7);
+8) update provides set price =price*1;
+9) delete from offers where code=(select code from providers where code= 'RBT') and code=4;
+10) delete from offers where code=(select code from providers where code= 'RBT');

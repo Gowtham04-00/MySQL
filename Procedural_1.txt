@@ -1,0 +1,40 @@
+8) PROCEDURAL
+
+
+
+1) 
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `track_character`(
+in getname varchar(45)
+)
+BEGIN
+select c.name, p.name, sum(t.TimeOfDeparture- t.TimeOfArrival)from characters c 
+inner join timetable t on c.name=t.charactername inner join planets p on t.planetname=
+p.name
+ where c.name=getname 
+ group by c.name,p.name;
+
+
+END
+
+
+2) 
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `track_planet`(
+in getname varchar(45)
+)
+BEGIN
+select  count(characterName),planetname from timetable where planetname=getname group by planetname;
+END
+
+
+3)CREATE  FUNCTION `planet_hopping`(getname varchar(45)) RETURNS int
+    DETERMINISTIC
+BEGIN
+declare result int;
+select  count(planetname)into result from timetable where charactername=getname group by planetname;
+RETURN result;
+END
+
+

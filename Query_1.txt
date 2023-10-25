@@ -1,0 +1,48 @@
+1st  (1_questions.sql)
+
+1) a.select * from sakila.actor;
+   b.select last_name from sakila.actor;
+   c.select title,description, rental_duration, rental_rate,(rental_duration*rental_rate) as total_rental_cost from sakila.film;
+
+2) a. select distinct last_name from actor;
+   b. select distinct postal_code from address;
+   c. select distinct rating from film;
+
+3) a. select title, description, rating, length from film where length >180;
+   b. select payment_id, amount, payment_date from payment where payment_date >=05/27/2005;
+   c. select payment_id, amount, payment_date from payment where payment_date =05/27/2005;
+   d. select * from customer where  first_name like "%n" and last_name like "s%" or "a%" ;
+   e. select * from customer where last_name like "m%" or active=0 ;
+   f. select * from category where category_id>4 and (name like "c%" or name like "s%" or name like "t%") ;
+   g. select staff_id, first_name, last_name, address_id, picture, email, store_id, active, username, last_update 
+      from staff where password is not null;
+   h. select staff_id, first_name, last_name, address_id, picture, email, store_id, active, username, last_update 
+      from staff where password is null;
+
+4) a. select phone,district from address where district in ('california' ,'england' ,'taipei' ,'west java');
+   b. select payment_id, amount, payment_date from payment where date(payment_date) in ('2005/05/25','2005/05/27', 2005/05/29) ;
+   c. select * from film where rating in ('g','pg-13','nc-17');
+  
+5) a. select * from payment where  (payment_date >='2005/05/25  00:00:00') and (payment_date <='2005/05/26 23:59:59');
+   b. select title, description, rating, length from film where char_length (description) between 100 and 120;
+  
+6) a. select title, description, release_year from film where description like "%A Thoughtful%";
+   b. select title, description, rental_duration from film where description like "%Boat";
+   c. select title,length, description, rental_rate from film where description like "%database%" and length >=180;
+
+7) a. select * from payment limit 20;
+   b. select payment_date,amount from payment where amount>5 limit 1000,1000;
+   c. select * from customer limit 101,99;
+
+8) a. select * from film order by length;
+   b. select distinct rating from film order by rating desc;
+   c. select payment_date,amount from payment  order by amount desc limit 20 ;
+   d. select title,description, special_features, length, rental_duration from film where length<120 and rental_duration>5
+      and rental_duration<7 order by length desc limit 10 ;
+
+9) a. select c.first_name, c.last_name, a.first_name, a.last_name from customer c left join actor a on a.last_name=c.last_name ;
+   b. select c.first_name, c.last_name, a.first_name, a.last_name from customer c right join actor a on a.last_name=c.last_name ;
+   c. select c.first_name, c.last_name, a.first_name, a.last_name from customer c inner join actor a on a.last_name=c.last_name ;
+   d. select c.city,co.country from city c left join country co on co.country_id=c.country_id;
+   e. select f.title, f.description, f.release_year, l.name from film f left join language l on l.language_id=f.language_id;
+   f. select s.first_name, s.last_name, a.address, a.address2, c.city, a.district, a.postal_code from staff s left join address a on a.address_id=s.address_id left join city c on c.city_id=a.city_id;
